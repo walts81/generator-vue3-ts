@@ -1,6 +1,6 @@
 {
   "name": "@walts81/generator-vue3-ts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Yo generator for starting a Vue3 TypeScript project",
   "homepage": "https://github.com/walts81/generator-vue3-ts",
   "author": {
