@@ -15,10 +15,17 @@ module.exports = class extends Generator {
 
     const prompts = [
       {
+        type: 'list',
+        name: 'vueVersion',
+        message: 'What version of Vue would you like to use?',
+        choices: ['2', '3'],
+        default: '3',
+      },
+      {
         type: 'string',
         name: 'name',
-        message: 'Enter a name for this Vue3 app',
-        default: 'My Awesome Vue3 App',
+        message: 'Enter a name for this Vue app',
+        default: 'My Awesome Vue App',
       },
     ];
 
@@ -47,6 +54,20 @@ module.exports = class extends Generator {
       this.destinationPath('.devcontainer/')
     );
     this.fs.copy(this.templatePath('src/'), this.destinationPath('src/'));
+    const prefix = this.props.vueVersion === '2' ? 'vue2' : 'vue3';
+    this.fs.copyTpl(
+      this.templatePath(`${prefix}/rootfiles/`),
+      this.destinationPath(''),
+      this.props
+    );
+    this.fs.copy(
+      this.templatePath(`${prefix}/src/`),
+      this.destinationPath('src/')
+    );
+    this.fs.copy(
+      this.templatePath(`${prefix}/dotfiles/.*`),
+      this.destinationPath('')
+    );
   }
 
   install() {

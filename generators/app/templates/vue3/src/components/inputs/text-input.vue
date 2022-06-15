@@ -36,7 +36,7 @@ import {
   textInputEventNames,
   getTextInputEmits,
   getTextInputProps,
-} from '@/models/text-input';
+} from './text-input';
 
 const emits = getTextInputEmits();
 const props = getTextInputProps();
