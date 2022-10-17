@@ -38,8 +38,10 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    const isVue2 = this.props.vueVersion === '2';
+    const prefix = isVue2 ? 'vue2' : 'vue3';
     this.fs.copyTpl(
-      this.templatePath('public/'),
+      this.templatePath(`${prefix}/public/`),
       this.destinationPath('public/'),
       this.props
     );
@@ -53,8 +55,7 @@ module.exports = class extends Generator {
       this.templatePath('.devcontainer/'),
       this.destinationPath('.devcontainer/')
     );
-    this.fs.copy(this.templatePath('src/'), this.destinationPath('src/'));
-    const prefix = this.props.vueVersion === '2' ? 'vue2' : 'vue3';
+    this.fs.copy(this.templatePath('src/'), this.destinationPath('src/'));    
     this.fs.copyTpl(
       this.templatePath(`${prefix}/rootfiles/`),
       this.destinationPath(''),
